@@ -1,5 +1,5 @@
 # mlflow-sagemaker
-* [](https://docs.databricks.com/applications/mlflow/quick-start-python.html)
+* [databrick-tutorial](https://docs.databricks.com/applications/mlflow/quick-start-python.html)
 
 ```
 pip install awscli --upgrade --user
@@ -11,3 +11,5 @@ aws configure
 3. build&push docker image to Elastic Container Registry (ECR): `mlflow sagemaker build-and-push-container`
     * this serves as a base image for all models deployed by mlflow, so fully independent of the actual model and its requirements
     * see: https://eu-central-1.console.aws.amazon.com/ecr/repositories?region=eu-central-1
+    
+* update model: `mfs.deploy(app_name=app_name, model_uri=model_uri, image_url=image_ecr_url, region_name=region, mode="replace")`

@@ -8,7 +8,7 @@ if __name__ == '__main__':
     run_id = "8edb7181fbec4651af03147fe2086db4"  # see in file: mlruns/.../artifacts/model/MLmodel
     region = "eu-central-1"
     aws_id = os.popen("aws sts get-caller-identity --query Account --output text").read().strip("\n")
-    arn = "arn:aws:iam::{aws_id}:role/your-role".format(aws_id=aws_id)
+    arn = "arn:aws:iam::{aws_id}:role/service-role/AmazonSageMaker-ExecutionRole-...".format(aws_id=aws_id) # TODO(tilo): where to get this from?
     app_name = "diabetes-class"
     model_uri = "mlruns/%s/%s/artifacts/model" % (experiment_id, run_id)
     image_url = aws_id + ".dkr.ecr." + region + ".amazonaws.com/mlflow-pyfunc:1.8.0"  # change to your mlflow version
@@ -20,5 +20,5 @@ if __name__ == '__main__':
                execution_role_arn=arn,
                image_url=image_url,
                instance_count=1,
-               instance_type="t3.micro"
+               instance_type="ml.t2.medium"
                )
